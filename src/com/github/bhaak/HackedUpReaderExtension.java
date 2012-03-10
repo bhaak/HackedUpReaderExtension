@@ -20,6 +20,10 @@ public class HackedUpReaderExtension implements Menuable {
 
 		// e-books location
 		File folder = new File("/mnt/us/documents/");
+		addEBooksToMenu(topMenu, folder, cr3);
+	}
+
+	private void addEBooksToMenu(LauncherMenu topMenu, File folder, File cr3) {
 		File[] files = folder.listFiles(new BookFilter());
 		for (int i=0; i<files.length; i++) {
 			if (files[i].isFile()) {
@@ -32,9 +36,9 @@ public class HackedUpReaderExtension implements Menuable {
 				topMenu.addMenuItem(launcherScript);
 			} else if (files[i].isDirectory()) {
 				// add sub directories as sub menus
-				LauncherAction subMenu = new LauncherMenu(files[i].getName(), i);
+				LauncherMenu subMenu = new LauncherMenu(files[i].getName(), i);
 				topMenu.addMenuItem(subMenu);
-				// TODO rekursiv runter
+				addEBooksToMenu(subMenu, files[i], cr3);
 			}
 		}
 	}
