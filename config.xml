@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<information>
+	<name>HackedUpReader Plugin</name>
+	<version>1.0</version>
+	<author>Patric Mueller</author>
+	<id>hackedupreaderplugin</id>
+</information>
+<menus>
+	<menu type="java" jar="HackedUpReaderExtension.jar">com.github.bhaak.HackedUpReaderExtension</menu>
+</menus>
