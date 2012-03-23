@@ -18,6 +18,14 @@ public class HackedUpReaderExtension implements Menuable {
 		// HackedUpReader location
 		File cr3 = new File("/mnt/us/cr3xcb/bin/cr3");
 
+		// launch HackedUpReader with last read e-book
+		LauncherAction launcherScript = new LauncherExecutable(
+				"Open last read e-book",
+				0,
+				cr3,
+				"--last-book");
+		topMenu.addMenuItem(launcherScript);
+		
 		// e-books location
 		File folder = new File("/mnt/us/documents/");
 		addEBooksToMenu(topMenu, folder, cr3);
