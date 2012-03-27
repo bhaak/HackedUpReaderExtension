@@ -61,7 +61,9 @@ public class HackedUpReaderExtension implements Menuable {
 				filename.endsWith(".rtf") ||
 				filename.endsWith(".html") ||
 				filename.endsWith(".htm") ||
-				filename.endsWith(".pdb")) {
+				filename.endsWith(".pdb") ||
+				filename.endsWith(".mobi") ||
+				filename.endsWith(".chm")) {
 				return true;
 			} else if (file.isDirectory()) {
 				// ignore dictionaries directory
