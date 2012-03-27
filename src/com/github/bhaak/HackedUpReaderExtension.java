@@ -20,7 +20,7 @@ public class HackedUpReaderExtension implements Menuable {
 
 		// launch HackedUpReader with last read e-book
 		LauncherAction launcherScript = new LauncherExecutable(
-				"Open last read e-book",
+				"Open last book",
 				0,
 				cr3,
 				"--last-book");
