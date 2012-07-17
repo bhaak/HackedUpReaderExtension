@@ -1,6 +1,9 @@
 package com.github.bhaak;
 
 import java.io.File;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import com.yifanlu.Kindle.LauncherAction;
 import com.yifanlu.Kindle.LauncherMenu;
@@ -25,7 +28,7 @@ public class HackedUpReaderExtension implements Menuable {
 		// launch HackedUpReader with last read e-book
 		LauncherAction launcherScript = new LauncherExecutable(
 				"Open last book",
-				0,
+				-1,
 				cr3,
 				"--last-book");
 		topMenu.addMenuItem(launcherScript);
@@ -37,6 +40,9 @@ public class HackedUpReaderExtension implements Menuable {
 
 	private int addEBooksToMenu(LauncherMenu topMenu, File folder, File cr3) {
 		File[] files = folder.listFiles(new BookFilter());
+		// sort files
+		Arrays.sort(files, new FileComparator());
+		// 
 		int bookCount = 0;
 		
 		for (int i=0; i<files.length; i++) {
@@ -85,6 +91,19 @@ public class HackedUpReaderExtension implements Menuable {
 				return !filename.endsWith(".sdr");
 			}
 			return false;
+		}
+	}
+
+	class FileComparator implements Comparator<File> {
+		Collator collator;
+
+		public FileComparator() {
+			collator = Collator.getInstance();
+			// compare case insensitive
+			collator.setStrength(Collator.SECONDARY);
+		}
+		public int compare(File file1, File file2) {
+			return collator.compare(file1.getName(), file2.getName());
 		}
 	}
 }
