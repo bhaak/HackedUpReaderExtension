@@ -35,8 +35,10 @@ public class HackedUpReaderExtension implements Menuable {
 		addEBooksToMenu(topMenu, folder, cr3);
 	}
 
-	private void addEBooksToMenu(LauncherMenu topMenu, File folder, File cr3) {
+	private int addEBooksToMenu(LauncherMenu topMenu, File folder, File cr3) {
 		File[] files = folder.listFiles(new BookFilter());
+		int bookCount = 0;
+		
 		for (int i=0; i<files.length; i++) {
 			if (files[i].isFile()) {
 				// add all e-books under folder
@@ -46,13 +48,18 @@ public class HackedUpReaderExtension implements Menuable {
 						cr3,
 						files[i].getAbsolutePath());
 				topMenu.addMenuItem(launcherScript);
+				bookCount++;
 			} else if (files[i].isDirectory()) {
 				// add sub directories as sub menus
 				LauncherMenu subMenu = new LauncherMenu(files[i].getName(), i);
-				topMenu.addMenuItem(subMenu);
-				addEBooksToMenu(subMenu, files[i], cr3);
+				int dirBookCount = addEBooksToMenu(subMenu, files[i], cr3);
+				if (dirBookCount > 0) {
+					topMenu.addMenuItem(subMenu);
+					bookCount += dirBookCount;
+				}
 			}
 		}
+		return bookCount;
 	}
 
 	class BookFilter implements java.io.FileFilter {
