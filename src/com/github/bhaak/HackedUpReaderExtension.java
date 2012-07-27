@@ -10,7 +10,7 @@ import com.yifanlu.Kindle.LauncherMenu;
 import com.yifanlu.Kindle.Menuable;
 
 public class HackedUpReaderExtension implements Menuable {
-
+	
 	@Override
 	public void addItemsToMenu(LauncherMenu menu)
 	{
@@ -38,13 +38,16 @@ public class HackedUpReaderExtension implements Menuable {
 		addEBooksToMenu(topMenu, folder, cr3);
 	}
 
+	private FileComparator fileComparator = new FileComparator();
+	private BookFilter bookfilter = new BookFilter();
+	
 	private int addEBooksToMenu(LauncherMenu topMenu, File folder, File cr3) {
-		File[] files = folder.listFiles(new BookFilter());
+		File[] files = folder.listFiles(bookfilter);
+		if (files == null) { return 0; }
 		// sort files
-		Arrays.sort(files, new FileComparator());
-		// 
-		int bookCount = 0;
+		Arrays.sort(files, fileComparator);
 		
+		int bookCount = 0;
 		for (int i=0; i<files.length; i++) {
 			if (files[i].isFile()) {
 				// add all e-books under folder
