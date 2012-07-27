@@ -5,12 +5,17 @@ import java.text.Collator;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.yifanlu.Kindle.LauncherAction;
 import com.yifanlu.Kindle.LauncherMenu;
 import com.yifanlu.Kindle.Menuable;
 
 public class HackedUpReaderExtension implements Menuable {
 	
+    private static Logger logger = LoggerFactory.getLogger(HackedUpReaderExtension.class);
+
 	@Override
 	public void addItemsToMenu(LauncherMenu menu)
 	{
@@ -38,6 +43,7 @@ public class HackedUpReaderExtension implements Menuable {
 		addEBooksToMenu(topMenu, folder, cr3);
 	}
 
+	private static Runtime runtime = Runtime.getRuntime();
 	private FileComparator fileComparator = new FileComparator();
 	private BookFilter bookfilter = new BookFilter();
 	
@@ -49,6 +55,7 @@ public class HackedUpReaderExtension implements Menuable {
 		
 		int bookCount = 0;
 		for (int i=0; i<files.length; i++) {
+			logger.info("{} {}", Long.toString(runtime.totalMemory()), files[i].getAbsolutePath());
 			if (files[i].isFile()) {
 				// add all e-books under folder
 				LauncherAction launcherScript = new LauncherExecutable(
