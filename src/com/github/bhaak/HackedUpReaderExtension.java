@@ -77,7 +77,8 @@ public class HackedUpReaderExtension implements Menuable {
 			String filename = file.getName().toLowerCase();
 			if (filename.endsWith(".epub") ||
 				filename.endsWith(".fb2") ||
-				filename.endsWith(".txt") ||
+				filename.endsWith(".fb2.zip") ||
+				(filename.endsWith(".txt") && !filename.endsWith(".bmk.txt")) || // skip bookmarks generated files
 				filename.endsWith(".rtf") ||
 				filename.endsWith(".html") ||
 				filename.endsWith(".htm") ||
