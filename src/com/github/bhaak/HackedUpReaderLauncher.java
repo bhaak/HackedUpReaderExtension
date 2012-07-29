@@ -1,7 +1,6 @@
 package com.github.bhaak;
 
 import java.io.File;
-import java.util.PriorityQueue;
 
 import com.yifanlu.Kindle.LauncherAction;
 import com.yifanlu.Kindle.LauncherMenu;
@@ -55,7 +54,12 @@ public class HackedUpReaderLauncher extends LauncherMenu {
 		
 		// e-books location
 		File folder = new File("/mnt/us/documents/");
-		//addEBooksToMenu(topMenu, folder, cr3);
+
+		// Most recently added e-books
+		LauncherMenu mostRecentsBooks = new MostRecentBooksMenu("Most recently added books", folder, cr3, -1);
+		this.addMenuItem(mostRecentsBooks);
+
+		// add books from the top documents directory directly under the first menu
 		LauncherMenu booksMenu = new BooksDirectoryMenu("Books", folder, cr3, 0);
 		booksMenu.initMenu();
 		LauncherAction[] menuItems = booksMenu.getMenuItems();
