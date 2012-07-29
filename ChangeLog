@@ -1,0 +1,15 @@
+2012-07-29  Version 1.3
+	* New submenu: "Most recently added books"
+	* Performance improvements, notably speeding up launching
+	  of the KindleLauncher itself
+	* Show fb2.zip files in menu
+
+2012-07-22  Version 1.2
+	* File names are sorted case-insensitive
+	* Update config.xml for new location of HackedUpReader
+	* Show .mobi and .chm files in menu
+	* Filter directories that don't contain any books
+	* Rename "Open last book" entry
+
+2012-03-10  Version 1.0
+	* First version of a GUI launcher extension for HackedUpReader
