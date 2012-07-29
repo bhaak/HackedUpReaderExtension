@@ -3,9 +3,6 @@ package com.github.bhaak;
 import java.io.File;
 import java.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.yifanlu.Kindle.LauncherAction;
 import com.yifanlu.Kindle.LauncherMenu;
 
@@ -23,8 +20,6 @@ public class BooksDirectoryMenu extends LauncherMenu {
 	private File directory;
 	/** The executable ebook reader binary. */
 	private File executable;
-
-	private static Logger logger = LoggerFactory.getLogger(HackedUpReaderExtension.class);
 	
 	/**
 	 * Creates a new submenu with its text label and priority
@@ -55,17 +50,12 @@ public class BooksDirectoryMenu extends LauncherMenu {
 		setHasArrow(true);
 		this.directory = directory;
 		this.executable = executable;
-		logger.info("Initialized DynamicEbookLauncherMenu");
 	}
 
 	@Override
 	public void initMenu() {
-		// TODO Auto-generated method stub
-		logger.info("DynamicEbookLauncherMenu.initMenu() 1");
 		addEBooksToMenu();
-		logger.info("DynamicEbookLauncherMenu.initMenu() 2");
 		super.initMenu();
-		logger.info("DynamicEbookLauncherMenu.initMenu() 3");
 	}
 
 	private static FileComparator fileComparator = new FileComparator();
@@ -89,14 +79,29 @@ public class BooksDirectoryMenu extends LauncherMenu {
 				this.addMenuItem(launcherScript);
 				bookCount++;
 			} else if (files[i].isDirectory()) {
-				// add sub directories as sub menus
-				LauncherMenu subMenu = new BooksDirectoryMenu(files[i].getName(), files[i], executable, i);
-				//int dirBookCount = addEBooksToMenu(subMenu, files[i], cr3);
-				//if (dirBookCount > 0) {
-				this.addMenuItem(subMenu);
-				//	bookCount += dirBookCount;
-				//}
+				if (hasDirectoryBooks(files[i])) {
+					// add sub directories as sub menus
+					LauncherMenu subMenu = new BooksDirectoryMenu(files[i].getName(), files[i], executable, i);
+					this.addMenuItem(subMenu);
+				}
 			}
 		}
+	}
+
+	/** Returns true if <code>directory</code> contains at least one ebook. */
+	private boolean hasDirectoryBooks(File directory) {
+		File[] files = directory.listFiles(bookfilter);
+		if (files == null) { return false; }
+
+		for (int i=0; i<files.length; i++) {
+			if (files[i].isFile()) {
+				return true;
+			} else if (files[i].isDirectory()) {
+				if (hasDirectoryBooks(files[i])) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
