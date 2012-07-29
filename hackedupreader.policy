@@ -1,5 +1,0 @@
-grant {
-	permission java.io.FilePermission "/mnt/us/cr3xcb/bin/cr3", "execute";
-	permission java.io.FilePermission "/mnt/us/documents", "read";
-	permission java.io.FilePermission "/mnt/us/documents/-", "read";
-};
