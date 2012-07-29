@@ -13,7 +13,7 @@ import com.yifanlu.Kindle.LauncherAction;
  * to work, there needs to be appropriate entries in the java.policy
  * file.
  *
- * @author Patric Mueller
+ * @author Patric Mueller &lt;bhaak@gmx.net&gt;
  * @version 1.0
  * @see JSONMenu and LauncherScript
  */
