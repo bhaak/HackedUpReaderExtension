@@ -25,9 +25,9 @@ line:
 
     mkdir /mnt/us/extension/hackedupreader/
     cp hackedupreader/config.xml /mnt/us/extension/hackedupreader/
-    mntroot ro
-    cp hackedupreader/HackedUpReaderExtension.jar /opt/amazon/ebook/lib/
     mntroot rw
+    cp hackedupreader/HackedUpReaderExtension.jar /opt/amazon/ebook/lib/
+    mntroot ro
 
 Kill the cvm process or restart your Kindle and the new Launcher entry will
 show up.
