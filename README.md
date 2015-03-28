@@ -5,6 +5,8 @@ HackedUpReaderExtension is an extension for the Kindle Touch GUI
 launcher https://github.com/yifanlu/KindleLauncher
 for starting https://github.com/bhaak/HackedUpReader
 
+This is only for Kindle Touch devices with a firmware of 5.0.x. For newer devices, look for [KUAL (Kindle Unified Application Launcher)](http://www.mobileread.com/forums/showthread.php?t=203326).
+
 This KindleLauncher extension will install a submenu called
 "HackedUpReader" that contains an entry for starting up
 HackedUpReader with the last read book, an entry for showing
